@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Rajneesh Dixit — .NET Developer</title>
+<link rel="icon" href="data:," />
+<style>
+  /* --- Theme tokens --- */
+  :root{
+    --bg:#0d1117; --card:#0f1720; --muted:#8b949e; --text:#c9d1d9; --accent:#58a6ff;
+    --glass: rgba(255,255,255,0.03); --border:#21262d; --tag:#161b22;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,#02040a 0%, #0d1117 100%);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:36px;
+  }
+
+  /* container */
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns: 320px 1fr;
+    gap:24px;
+  }
+
+  /* left column (profile) */
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  }
+  .profile-header{display:flex;gap:14px;align-items:center}
+  .avatar{
+    width:84px;height:84px;border-radius:12px;
+    background:linear-gradient(135deg,#2b2f36,#14181c);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted);
+    border:1px solid rgba(255,255,255,0.03);
+    font-family: monospace;
+  }
+  .name{
+    font-size:20px;color:var(--text);margin:0 0 6px 0;font-weight:700;
+  }
+  .role{color:var(--muted);margin:0;font-size:13px}
+  .contact{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.6}
+  .contact a{color:var(--accent);text-decoration:none}
+  .badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .badge{background:var(--tag);padding:6px 8px;border-radius:8px;font-size:13px;border:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+  .starline{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+  .star-pill{background:rgba(88,166,255,0.12);border:1px solid rgba(88,166,255,0.12);padding:6px 10px;border-radius:999px;color:var(--accent);font-weight:600}
+
+  /* PROFESSIONAL HIGHLIGHTS */
+  .highlights{margin-top:18px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02)}
+  .highlights h4{margin:0 0 8px 0;color:var(--muted);font-size:13px}
+  .highlights ul{margin:0;padding-left:18px;color:var(--muted)}
+  .highlights li{margin-bottom:6px;font-size:13px}
+
+  /* right column (content) */
+  .content{display:flex;flex-direction:column;gap:18px}
+  h2.section{margin:0;color:var(--accent);font-size:14px;letter-spacing:0.6px}
+  .summary{background:var(--glass);padding:14px;border-radius:10px;border:1px solid var(--border);color:var(--muted)}
+  .experience, .projects, .education, .skills, .certs{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); padding:16px;border-radius:10px;border:1px solid var(--border)}
+
+  .job{margin-bottom:10px}
+  .job .title{font-weight:700;color:var(--text)}
+  .job .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
+
+  ul.kv{padding-left:18px;margin:0;color:var(--muted)}
+  ul.kv li{margin-bottom:6px}
+
+  .proj{
+    display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);background:rgba(255,255,255,0.01);margin-bottom:10px
+  }
+  .proj .p-title{font-weight:700;color:var(--text);margin-bottom:6px}
+  .proj .p-desc{color:var(--muted);font-size:13px;margin-bottom:8px}
+  .p-tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:6px;font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,0.01)}
+
+  .skills .skill-grid{display:flex;flex-wrap:wrap;gap:8px}
+  .skill-pill{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);font-size:13px;color:var(--muted)}
+
+  footer{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin-top:6px}
+
+  /* small screens */
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr; padding:0 12px}
+  }
+
+  /* print-friendly */
+  @media print{
+    body{background:white;color:black}
+    .card, .projects, .experience, .skills, .education, .certs, .summary{border:0;background:transparent}
+    .avatar{background:#eee;color:#333}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- LEFT -->
+    <aside class="card">
+      <div class="profile-header">
+        <div class="avatar" title="Avatar">RD</div>
+        <div>
+          <div class="name">Rajneesh Dixit</div>
+          <div class="role">.NET Developer</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px">Lucknow, Uttar Pradesh</div>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div style="margin-top:12px"><strong style="color:var(--text)">Phone:</strong> 8175958905</div>
+        <div><strong style="color:var(--text)">Email:</strong> <a href="mailto:rajneeshdixit15@gmail.com">rajneeshdixit15@gmail.com</a></div>
+        <div><strong style="color:var(--text)">LinkedIn:</strong> <a href="https://www.linkedin.com/in/rajneesh-dixit-575b9a162" target="_blank">rajneesh-dixit-575b9a162</a></div>
+      </div>
+
+      <div class="badge-row" aria-hidden="true">
+        <span class="badge">3+ yrs</span>
+        <span class="badge">ASP.NET MVC</span>
+        <span class="badge">SQL Server</span>
+        <span class="badge">Entity Framework</span>
+      </div>
+
+      <div class="highlights" aria-hidden="false">
+        <h4>Professional Highlights</h4>
+        <ul>
+          <li>Experienced in L2/L3 support and incident management for Government University systems.</li>
+          <li>Delivered end-to-end modules for admissions, examinations, and grievance handling.</li>
+          <li>Skilled in query optimization and improving system performance (example: ~40% faster retrieval).</li>
+          <li>Hands-on with Windows Server deployments, job scheduling, and security reviews.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- RIGHT -->
+    <main class="content">
+      <section class="summary">
+        <h2 class="section">Profile</h2>
+        <p style="margin:8px 0 0 0;color:var(--muted);line-height:1.5">
+          Skilled <strong>.NET Developer</strong> with a strong SQL and ASP.NET MVC background and over 3 years of professional experience.
+          Worked with multiple government university clients at L2/L3 levels. Currently working as a .NET & BASIS Consultant for a UP Government university client.
+          Continuously learning new .NET features and technologies.
+        </p>
+      </section>
+
+      <section class="experience">
+        <h2 class="section">Experience</h2>
+        <div class="job">
+          <div class="title">Backend Developer — Wonder Point <span style="font-weight:600;color:var(--muted)">(2022 – Present)</span></div>
+          <div class="meta">Windows Server • MS SQL Server • L2/L3 Support • BAU</div>
+          <ul class="kv">
+            <li>Developed and enhanced University Student Management System modules: Exams, Grievance handling, Admissions.</li>
+            <li>Worked on Windows Servers with SQL Server as the primary DB for development, deployment & support.</li>
+            <li>Provided BAU support: job scheduling, deployments, troubleshooting, monitoring and security reviews.</li>
+            <li>Handled priority incident management and L2/L3 escalations for university systems.</li>
+            <li>Contributed to internal training and continuous knowledge sharing.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="projects">
+        <h2 class="section">Projects (Pinned)</h2>
+
+        <div class="proj">
+          <div>
+            <div class="p-title">UPRTOU — Student Information Management System</div>
+            <div class="p-desc">Designed and developed a comprehensive system to digitize academic workflows for Rajarshi Tandon Open University.</div>
+            <div style="color:var(--muted);font-size:13px">
+              Key contributions:
+              <ul class="kv" style="margin-top:6px">
+                <li>End-to-end modules for registration, course management & academic records.</li>
+                <li>AJAX & jQuery for dynamic validations and better UX.</li>
+                <li>Entity Framework for optimized DB interactions — improved data retrieval by ~40%.</li>
+              </ul>
+            </div>
+            <div class="p-tags" style="margin-top:8px">
+              <span class="tag">ASP.NET MVC</span><span class="tag">Entity Framework</span><span class="tag">SQL</span><span class="tag">AJAX</span>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:13px;color:var(--muted)">Verified</div>
+            <div class="star-pill" style="margin-top:8px">★ 42</div>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div>
+            <div class="p-title">Lucknow University — University Management Portal</div>
+            <div class="p-desc">Led backend development to automate academic & administrative operations (faculty login, enrollments, exam scheduling).</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">Technologies: AJAX, JSON, Entity Framework, MS SQL Server</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:13px;color:var(--muted)">Verified</div>
+            <div class="star-pill" style="margin-top:8px">★ 30</div>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div>
+            <div class="p-title">KMCLU — Result Management Portal</div>
+            <div class="p-desc">Built result management & publication system for Khwaja Moinuddin Chishti Language University.</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">Result display, reporting & admin workflows.</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:13px;color:var(--muted)">Verified</div>
+            <div class="star-pill" style="margin-top:8px">★ 15</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="skills">
+        <h2 class="section">Skills</h2>
+        <div class="skill-grid" style="margin-top:10px">
+          <div class="skill-pill">ASP.NET MVC</div>
+          <div class="skill-pill">Entity Framework</div>
+          <div class="skill-pill">ADO.NET</div>
+          <div class="skill-pill">C#</div>
+          <div class="skill-pill">MS SQL Server</div>
+          <div class="skill-pill">MySQL</div>
+          <div class="skill-pill">JavaScript</div>
+          <div class="skill-pill">jQuery / AJAX</div>
+          <div class="skill-pill">JSON</div>
+          <div class="skill-pill">HTML</div>
+          <div class="skill-pill">Git</div>
+          <div class="skill-pill">Linux</div>
+          <div class="skill-pill">External Audits</div>
+        </div>
+      </section>
+
+      <section class="education">
+        <h2 class="section">Education</h2>
+        <div style="margin-top:8px;color:var(--muted);font-size:13px">
+          <strong>Master of Computer Application</strong>, Chandigarh University — 2024<br>
+          <em>Major:</em> MVC.NET | <em>Minor:</em> Linux
+        </div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px">
+          <strong>Bachelor of Computer Application</strong>, Integral University, Lucknow — 2021<br>
+          <em>Major:</em> MVC.NET | <em>Minor:</em> SQL & Python
+        </div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px">
+          <strong>Intermediate</strong>, UP Board — 2018<br>
+          <em>Major:</em> Mathematics | <em>Minor:</em> Chemistry
+        </div>
+      </section>
+
+      <section class="certs">
+        <h2 class="section">Certifications</h2>
+        <ul class="kv" style="margin-top:8px">
+          <li>Git for Beginners — KodeKloud</li>
+        </ul>
+      </section>
+
+      <footer>
+        <div>© 2025 Rajneesh Dixit</div>
+        <div style="display:flex;gap:10px">
+          <a href="mailto:rajneeshdixit15@gmail.com" style="background:transparent;border:1px solid var(--border);color:var(--accent);padding:8px 12px;border-radius:8px;text-decoration:none">Contact</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
